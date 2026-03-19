@@ -11,7 +11,7 @@ public class Tile {
 	public static Tile[] tiles = new Tile[1024];
 	public static Tile airTile = new AirTile(0);
 	public static Tile floorTile = new FloorTile(1);
-	public static Tile stoneTile = new StoneTile(2);
+	public static Tile counterTile = new CounterTile(2);
 	public static Tile tableTile = new TableTile(3);
 	public static Tile terminalTile = new TerminalTile(4);
 	public static Tile wallRight = new Wall(1000);

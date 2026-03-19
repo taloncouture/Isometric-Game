@@ -35,7 +35,7 @@ public abstract class TileEntity extends Entity {
 				for(int tx = 0; tx < footX; tx++) {
 					int iso[] = World.toIso(x + ((tx - tz) * Tile.TILEWIDTH), y + ((ty - tz) * Tile.TILEHEIGHT), z + (tz * Tile.TILEHEIGHT));
 
-					g.drawImage(textures[tx + ty + tz], iso[0], iso[1], Tile.TILEWIDTH, Tile.TILEHEIGHT, null);
+					g.drawImage(textures[tx + ty + (tz * footX * footY)], iso[0], iso[1], Tile.TILEWIDTH, Tile.TILEHEIGHT, null);
 				}
 			}
 		}

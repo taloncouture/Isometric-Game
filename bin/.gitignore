@@ -1,8 +1,6 @@
-/dev/
-/display/
 /entities/
-/graphics/
-/input/
+/dev/
+/worlds/
 /states/
 /tiles/
-/worlds/
+/graphics/

@@ -11,7 +11,7 @@ import worlds.World;
 
 public class Player extends Entity{
 	
-	private double speed = 8;
+	private double speed = Config.SCALE_FACTOR * 1.5;
 	private double[] velocity = {0, 0};
 	
 
@@ -29,24 +29,7 @@ public class Player extends Entity{
 		
 		double dx = 0;
 		double dy = 0;
-		
-		int tileX = (int)Math.floor(x);
-	    int tileY = (int) Math.floor(y);
-	    int tileZ = (int) z;
-		
-		if(tileCollision(tileX, tileY, tileZ)) {
-			System.out.println("collision");
-		}
-		
-//		boolean collision = 
-//			    tileCollision((int)(x + bounds.x),                    (int)(y + bounds.y),                     (int)z) ||
-//			    tileCollision((int)(x + bounds.x + bounds.width),     (int)(y + bounds.y),                     (int)z) ||
-//			    tileCollision((int)(x + bounds.x),                    (int)(y + bounds.y + bounds.height),     (int)z) ||
-//			    tileCollision((int)(x + bounds.x + bounds.width),     (int)(y + bounds.y + bounds.height),     (int)z);
-//		
-//		if(collision) {
-//			System.out.println("COLLISION");
-//		}
+	
 
 		
 		if(handler.getKeyManager().right) {

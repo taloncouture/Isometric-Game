@@ -8,11 +8,14 @@ import java.util.List;
 import dev.Handler;
 import entities.BurgerStation;
 import entities.Door;
+import entities.DrinkStation;
 import entities.EntityManager;
 import entities.Foodbar;
 import entities.FryStation;
+import entities.MilkshakeStation;
 import entities.Player;
 import entities.Rack;
+import entities.Saladbar;
 import tiles.Tile;
 import worlds.RenderObject;
 import worlds.World;
@@ -47,8 +50,18 @@ public class GameState extends State{
 		Rack rack = new Rack(handler, 3 * Tile.TILEWIDTH, 8 * Tile.TILEHEIGHT, 2 * Tile.TILEHEIGHT);
 		entityManager.addTileEntity(rack);
 		
-		Door door = new Door(handler, 12 * Tile.TILEWIDTH, 4 * Tile.TILEHEIGHT, 1 * Tile.TILEHEIGHT);
+		Door door = new Door(handler, 11 * Tile.TILEWIDTH, 4 * Tile.TILEHEIGHT, 1 * Tile.TILEHEIGHT);
 		entityManager.addTileEntity(door);
+		
+		DrinkStation drinkStation = new DrinkStation(handler, 10 * Tile.TILEWIDTH, 1 * Tile.TILEHEIGHT, 1 * Tile.TILEHEIGHT);
+		entityManager.addTileEntity(drinkStation);
+		
+		MilkshakeStation milkshakeStation = new MilkshakeStation(handler, 3 * Tile.TILEWIDTH, 3 * Tile.TILEHEIGHT, 1 * Tile.TILEHEIGHT);
+		entityManager.addTileEntity(milkshakeStation);
+		
+		Saladbar saladbar = new Saladbar(handler, 4 * Tile.TILEWIDTH, 1 * Tile.TILEHEIGHT, 1 * Tile.TILEHEIGHT);
+		entityManager.addTileEntity(saladbar);
+		
 	}
 
 	@Override

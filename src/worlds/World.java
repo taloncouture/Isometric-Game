@@ -85,7 +85,7 @@ public class World {
 		
 		Tile t = Tile.tiles[tiles[x][y][z]];
 		if(t == null) {
-			return Tile.stoneTile;
+			return Tile.counterTile;
 		}
 		return t;
 	}
