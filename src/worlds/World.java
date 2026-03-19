@@ -17,7 +17,7 @@ public class World {
 	private int[][][] tiles;
 	
 	public static final int OFFSETX = (Config.WIDTH / 2) - (Tile.TILEWIDTH / 2) - Config.SCALE_FACTOR;
-	public static final int OFFSETY = (Tile.TILEHEIGHT);
+	public static final int OFFSETY = (Tile.TILEHEIGHT * 3);
 	
 	public World(String path) {
 		loadWorld(path);
@@ -32,12 +32,14 @@ public class World {
 		int[] isoCoords = new int[2];
 		double tx = x / Tile.TILEWIDTH;
 		double ty = y / Tile.TILEHEIGHT;
+		double tz = z / Tile.TILEHEIGHT;
 		int ix = OFFSETX + (int)((tx - ty) * (Config.HALF_W));
-		int iy = OFFSETY + (int)(((tx + ty) * (Config.HALF_H)) - (z * Config.HALF_H * 2) - (z * Config.SCALE_FACTOR));
+		int iy = OFFSETY + (int)(((tx + ty) * (Config.HALF_H)) - (tz * Config.HALF_H * 2) - (tz * Config.SCALE_FACTOR));
 		
 //		int snap = 2;
 //		isoCoords[0] = (Math.round(ix / 6)) * 6;
 //		isoCoords[1] = (Math.round(iy / 6)) * 6;
+		//iy -= depth;
 		
 		isoCoords[0] = ix;
 		isoCoords[1] = iy;
@@ -52,10 +54,15 @@ public class World {
 				for(int x = 0; x < width; x++) {
 					
 					if(getTile(x, y, z).getId() != 0) {
-						int[] iso = toIso(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT, z);
+						int[] iso = toIso(x * Tile.TILEWIDTH, y * Tile.TILEHEIGHT, (z * Tile.TILEHEIGHT));
+						//iso[1] -= getTile(x, y, z).depth;
 						//int depth = (int)((x + y) * 1000 + z * 100000);
-						int depth = (x + y) + (int)Math.floor((z));
-
+						int depth = ((x + y) + (int)Math.floor(z) * 2) * 2; // even numbers for tiles
+//						int tx = (int) (x * Tile.TILEWIDTH + (Tile.TILEWIDTH / 2)) / Tile.TILEWIDTH;
+//				        int ty = (int) (y * Tile.TILEHEIGHT + (Tile.TILEHEIGHT)) / Tile.TILEHEIGHT;
+//				        int tz = (int) z;
+//				        
+//				        int depth = ((tx + ty) + (int)Math.floor(tz) * 2) * 2; // odd numbers for entities
 						
 						renderList.add(new RenderObject(getTile(x, y, z), iso[0], iso[1], depth));
 						
@@ -83,6 +90,48 @@ public class World {
 		return t;
 	}
 	
+	private Tile[][] getNeighbors(int x, int y, int z){
+		Tile[][] neighbors = new Tile[3][3];
+		
+		for(int i = 0; i < 3; i++) {
+			for(int t = 0; t < 3; t++) {
+				neighbors[i][t] = Tile.airTile;
+			}
+		}
+		
+		if(x == 0) {
+			neighbors[0][0] = null;
+			neighbors[1][0] = null;
+			neighbors[2][0] = null;
+		}
+		if(y == 0) {
+			neighbors[0][0] = null;
+			neighbors[0][1] = null;
+			neighbors[0][2] = null;
+		}
+		if(x == width - 1) {
+			neighbors[0][2] = null;
+			neighbors[1][2] = null;
+			neighbors[2][2] = null;
+		}
+		if(y == height - 1) {
+			neighbors[2][0] = null;
+			neighbors[2][1] = null;
+			neighbors[2][2] = null;
+		}
+		
+		for(int i = 0; i < 3; i++) {
+			for(int t = 0; t < 3; t++) {
+				if(neighbors[i][t] != null) {
+					neighbors[i][t] = getTile(x, y, z);
+				}
+			}
+		}
+		return neighbors;
+		
+	}
+	
+
 	private void loadWorld(String path) {
 		String file = Utils.loadFileAsString(path);
 		String[] tokens = file.split("\\s+");

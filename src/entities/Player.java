@@ -38,15 +38,15 @@ public class Player extends Entity{
 			System.out.println("collision");
 		}
 		
-		boolean collision = 
-			    tileCollision((int)(x + bounds.x),                    (int)(y + bounds.y),                     (int)z) ||
-			    tileCollision((int)(x + bounds.x + bounds.width),     (int)(y + bounds.y),                     (int)z) ||
-			    tileCollision((int)(x + bounds.x),                    (int)(y + bounds.y + bounds.height),     (int)z) ||
-			    tileCollision((int)(x + bounds.x + bounds.width),     (int)(y + bounds.y + bounds.height),     (int)z);
-		
-		if(collision) {
-			System.out.println("COLLISION");
-		}
+//		boolean collision = 
+//			    tileCollision((int)(x + bounds.x),                    (int)(y + bounds.y),                     (int)z) ||
+//			    tileCollision((int)(x + bounds.x + bounds.width),     (int)(y + bounds.y),                     (int)z) ||
+//			    tileCollision((int)(x + bounds.x),                    (int)(y + bounds.y + bounds.height),     (int)z) ||
+//			    tileCollision((int)(x + bounds.x + bounds.width),     (int)(y + bounds.y + bounds.height),     (int)z);
+//		
+//		if(collision) {
+//			System.out.println("COLLISION");
+//		}
 
 		
 		if(handler.getKeyManager().right) {
@@ -92,13 +92,17 @@ public class Player extends Entity{
 		    tileCollision((int)(nextX + bounds.x),                (int)(y + bounds.y),                 (int)z) ||
 		    tileCollision((int)(nextX + bounds.x + bounds.width), (int)(y + bounds.y),                 (int)z) ||
 		    tileCollision((int)(nextX + bounds.x),                (int)(y + bounds.y + bounds.height), (int)z) ||
-		    tileCollision((int)(nextX + bounds.x + bounds.width), (int)(y + bounds.y + bounds.height), (int)z);
+		    tileCollision((int)(nextX + bounds.x + bounds.width), (int)(y + bounds.y + bounds.height), (int)z) ||
+	    	handler.getEntityManager().collidesWithEntity(this, nextX, y);
+
 
 		boolean collisionY = 
 		    tileCollision((int)(x + bounds.x),                (int)(nextY + bounds.y),                 (int)z) ||
 		    tileCollision((int)(x + bounds.x + bounds.width), (int)(nextY + bounds.y),                 (int)z) ||
 		    tileCollision((int)(x + bounds.x),                (int)(nextY + bounds.y + bounds.height), (int)z) ||
-		    tileCollision((int)(x + bounds.x + bounds.width), (int)(nextY + bounds.y + bounds.height), (int)z);
+		    tileCollision((int)(x + bounds.x + bounds.width), (int)(nextY + bounds.y + bounds.height), (int)z) ||
+	    	handler.getEntityManager().collidesWithEntity(this, x, nextY);
+
 
 		if(!collisionX) x = nextX;
 		if(!collisionY) y = nextY;
@@ -109,8 +113,9 @@ public class Player extends Entity{
 		
 		int tileX = (int) x / Tile.TILEWIDTH;
 		int tileY = (int) y / Tile.TILEHEIGHT;
+		int tileZ = (int) z / Tile.TILEHEIGHT;
 		
-		if(handler.getWorld().getTile(tileX, tileY, z) != Tile.airTile) {
+		if(handler.getWorld().getTile(tileX, tileY, tileZ) != Tile.airTile) {
 			return true;
 		}
 		return false;

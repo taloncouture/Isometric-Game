@@ -30,6 +30,10 @@ public abstract class Entity {
 		int[] renderLayers = {(int)z / Tile.TILEHEIGHT, (int)(z / Tile.TILEHEIGHT) + 1};
 	}
 	
+	public Rectangle getWorldBounds() {
+	    return new Rectangle((int)x + bounds.x, (int)y + bounds.y, bounds.width, bounds.height);
+	}
+	
 	public abstract void tick();
 	
 	public abstract void render(Graphics g);
