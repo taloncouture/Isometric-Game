@@ -35,9 +35,6 @@ public class GameState extends State{
 		handler.setEntityManager(entityManager);
 		entityManager.addEntity(player);
 		
-		Foodbar foodbar = new Foodbar(handler, 4 * Tile.TILEWIDTH, 1 * Tile.TILEWIDTH, 1 * Tile.TILEWIDTH);
-		entityManager.addTileEntity(foodbar);
-		
 		Foodbar foodbar2 = new Foodbar(handler, 3 * Tile.TILEHEIGHT, 8 * Tile.TILEHEIGHT, 1 * Tile.TILEHEIGHT);
 		entityManager.addTileEntity(foodbar2);
 		
