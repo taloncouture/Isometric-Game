@@ -8,7 +8,7 @@ import tiles.Tile;
 
 public class FryStation extends TileEntity{
 
-	public FryStation(Handler handler, double x, double y, double z) {
+	public FryStation(Handler handler, int x, int y, int z) {
 		super(handler, x, y, z, Assets.fryStation, Tile.TILEWIDTH * 2, Tile.TILEHEIGHT, Tile.TILEHEIGHT, 2, 1, 1);
 	}
 

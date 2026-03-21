@@ -90,7 +90,41 @@ public class World {
 		return t;
 	}
 	
-	private Tile[][] getNeighbors(int x, int y, int z){
+	public boolean[][] getValidNeighbors(int x, int y, int z){
+		boolean[][] neighbors = new boolean[3][3];
+		
+		for(int i = 0; i < 3; i++) {
+			for(int t = 0; t < 3; t++) {
+				neighbors[i][t] = true;
+			}
+		}
+		
+		if(x == 0) {
+			neighbors[0][0] = false;
+			neighbors[1][0] = false;
+			neighbors[2][0] = false;
+		}
+		if(y == 0) {
+			neighbors[0][0] = false;
+			neighbors[0][1] = false;
+			neighbors[0][2] = false;
+		}
+		if(x == width - 1) {
+			neighbors[0][2] = false;
+			neighbors[1][2] = false;
+			neighbors[2][2] = false;
+		}
+		if(y == height - 1) {
+			neighbors[2][0] = false;
+			neighbors[2][1] = false;
+			neighbors[2][2] = false;
+		}
+		
+		
+		return neighbors;
+	}
+	
+	public Tile[][] getNeighbors(int x, int y, int z){
 		Tile[][] neighbors = new Tile[3][3];
 		
 		for(int i = 0; i < 3; i++) {

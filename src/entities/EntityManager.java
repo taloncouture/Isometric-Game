@@ -21,6 +21,10 @@ public class EntityManager {
 		tileEntities.add(te);
 	}
 	
+	public List<TileEntity> getTileEntities(){
+		return tileEntities;
+	}
+	
 	public void tick() {
 		for(Entity e : entities) {
 			e.tick();

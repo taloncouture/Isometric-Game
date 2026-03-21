@@ -14,7 +14,7 @@ public abstract class TileEntity extends Entity {
 	protected int footX, footY, footZ;
 	
 
-	public TileEntity(Handler handler, double x, double y, double z, BufferedImage[] textures, int width, int height, int depth, int footX, int footY, int footZ) {
+	public TileEntity(Handler handler, int x, int y, int z, BufferedImage[] textures, int width, int height, int depth, int footX, int footY, int footZ) {
 		super(handler, x, y, z, textures[0], width, height);
 		
 		bounds.width = width;
@@ -40,7 +40,18 @@ public abstract class TileEntity extends Entity {
 			}
 		}
 		
-		
+	}
+	
+	public boolean isInteractive() {
+		return false;
+	}
+	
+	public int getTileX() {
+		return (int) x / Tile.TILEWIDTH;
+	}
+	
+	public int getTileY() {
+		return (int) y / Tile.TILEHEIGHT;
 	}
 
 }

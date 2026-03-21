@@ -9,7 +9,7 @@ import tiles.Tile;
 
 public class Door extends TileEntity{
 
-	public Door(Handler handler, double x, double y, double z) {
+	public Door(Handler handler, int x, int y, int z) {
 		super(handler, x, y, z, Assets.door_right, Tile.TILEWIDTH, Tile.TILEHEIGHT, Tile.TILEHEIGHT, 1, 1, 2);
 		bounds.x = 8 * Config.SCALE_FACTOR;
 		bounds.width = 11 * Config.SCALE_FACTOR;
@@ -18,6 +18,11 @@ public class Door extends TileEntity{
 	@Override
 	public void tick() {
 		
+	}
+	
+	@Override
+	public boolean isInteractive() {
+		return true;
 	}
 
 }

@@ -8,7 +8,7 @@ import tiles.Tile;
 
 public class Rack extends TileEntity{
 
-	public Rack(Handler handler, double x, double y, double z) {
+	public Rack(Handler handler, int x, int y, int z) {
 		super(handler, x, y, z, Assets.rack, Tile.TILEWIDTH * 2, Tile.TILEHEIGHT, Tile.TILEHEIGHT, 2, 1, 1);
 	}
 

@@ -22,11 +22,8 @@ public class Player extends Entity{
 		bounds.width = width - Config.SCALE_FACTOR * 8;
 		bounds.height = height - Config.SCALE_FACTOR * 8;
 	}
-
-
-	@Override
-	public void tick() {
-		
+	
+	private void move() {
 		double dx = 0;
 		double dy = 0;
 	
@@ -89,16 +86,55 @@ public class Player extends Entity{
 
 		if(!collisionX) x = nextX;
 		if(!collisionY) y = nextY;
+	}
+	
+	private int[] getTileCoords(double x, double y, double z) {
+		int[] coords = new int[3];
+		coords[0] = (int) x / Tile.TILEWIDTH;
+		coords[1] = (int) y / Tile.TILEWIDTH;
+		coords[2] = (int) z / Tile.TILEWIDTH;
+		
+		return coords;
+	}
+
+
+	@Override
+	public void tick() {
+		
+		move();
+		
+		int[] coords = getTileCoords(this.x, this.y, this.z);
+		Tile[][] neighbors = handler.getWorld().getNeighbors(coords[0], coords[1], coords[2]);
+		
+//		for(int i = 0; i < 3; i++) {
+//			for(int t = 0; t < 3; t++) {
+//				System.out.println(neighbors[i][t]);
+//			}
+//		}
+		
+		for(TileEntity te : handler.getEntityManager().getTileEntities()) {
+			//boolean[][] validNeighbors = handler.getWorld().getValidNeighbors(coords[0], coords[1], coords[2]);
+			
+			for(int i = -1; i < 2; i++) {
+				for(int t = -1; t < 2; t++) {
+					if(te.getTileX() == coords[0] + i && te.getTileY() == coords[1] + t) {
+						System.out.println("next to tile entity");
+					}
+				}
+			}
+		}
 		
 	}
 	
 	protected boolean tileCollision(int x, int y, int z) {
 		
-		int tileX = (int) x / Tile.TILEWIDTH;
-		int tileY = (int) y / Tile.TILEHEIGHT;
-		int tileZ = (int) z / Tile.TILEHEIGHT;
+//		int tileX = (int) x / Tile.TILEWIDTH;
+//		int tileY = (int) y / Tile.TILEWIDTH;
+//		int tileZ = (int) z / Tile.TILEWIDTH;
+//		
+		int[] coords = getTileCoords(x, y, z);
 		
-		if(handler.getWorld().getTile(tileX, tileY, tileZ) != Tile.airTile) {
+		if(handler.getWorld().getTile(coords[0], coords[1], coords[2]) != Tile.airTile) {
 			return true;
 		}
 		return false;

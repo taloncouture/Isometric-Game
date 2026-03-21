@@ -18,6 +18,7 @@ public class Tile {
 	public static Tile wallLeft = new Wall(1001, Assets.wallLeft);
 	public static Tile wallCorner = new Wall(1002, Assets.wallCorner);
 	public static Tile wallCornerInner = new Wall(1003, Assets.wallCornerInner);
+	public static Tile barrierTile = new BarrierTile(9);
 	
 	public static final int TILEWIDTH = 26 * Config.SCALE_FACTOR;
 	public static final int TILEHEIGHT = 26 * Config.SCALE_FACTOR;

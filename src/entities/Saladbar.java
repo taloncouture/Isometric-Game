@@ -10,7 +10,7 @@ import tiles.Tile;
 public class Saladbar extends TileEntity{
 	
 
-	public Saladbar(Handler handler, double x, double y, double z) {
+	public Saladbar(Handler handler, int x, int y, int z) {
 		super(handler, x, y, z, Assets.saladBar, Tile.TILEWIDTH * 2, Tile.TILEHEIGHT, Tile.TILEHEIGHT, 2, 1, 1);
 		bounds.height = Tile.TILEHEIGHT;
 	}
